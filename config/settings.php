@@ -29,6 +29,8 @@ return [
         'api_routes' => APP_ROOT . '/routes/api.php',
 
         'middleware_registration' => APP_ROOT . '/middleware/registration.php',
+
+        'maintenance_mode' => $_ENV['MAINTENANCE_MODE'] ?? false,
     ],
     'doctrine' => [
         // Enables or disables Doctrine metadata caching
@@ -42,7 +44,7 @@ return [
         // List of paths where Doctrine will search for metadata.
         // Metadata can be either YML/XML files or PHP classes annotated
         // with comments or PHP8 attributes.
-        'metadata_dirs' => [APP_ROOT . '/src/Domain'],
+        'metadata_dirs' => [APP_ROOT . '/src/Entity'],
 
         // The parameters Doctrine needs to connect to your database.
         // These parameters depend on the driver (for instance the 'pdo_sqlite' driver
@@ -52,5 +54,10 @@ return [
         'connection' => [
             'dsn' => $_ENV['DSN']
         ]
+    ], 
+    'log' => [
+        'file' => APP_ROOT . '/var/app.log',
+        'level' => $_ENV['LOG_LEVEL'] ?? 'debug',
+        'name' => 'app',
     ]
 ];
